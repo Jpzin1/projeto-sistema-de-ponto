@@ -1,6 +1,14 @@
 const diasSemana = document.getElementById("dia-semana");
 const dataAtual = document.getElementById("data-atual");
 const horaAtual = document.getElementById("hora-atual");
+const btnRegistrarPonto = document.getElementById("btn-registrar-ponto");
+
+btnRegistrarPonto.addEventListener("click", register);
+
+
+function register() {
+    alert("Bater ponto!");
+}
 
 
 function updateContentHour() {

@@ -1,3 +1,21 @@
+var modal = document.getElementById("modal");
+var btn = document.getElementById("btn-registrar-ponto");
+var span = document.getElementsByClassName("close")[0];
+
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+window.onkeydown = function (event) {
+    if (event.key == "Escape") {
+        modal.style.display = "none";
+    }
+}
+
 const diasSemana = document.getElementById("dia-semana");
 const dataAtual = document.getElementById("data-atual");
 const horaAtual = document.getElementById("hora-atual");

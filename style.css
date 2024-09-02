@@ -1,13 +1,32 @@
 body {
     box-sizing: border-box;
     margin: 0;
-    padding: 0;
     background-color: #f3f3f3;
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 50px;
 }
 
+.data-hora {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 10px; 
+    margin-bottom: 15px;
+}
+
+.data-hora p {
+    margin: 0;
+}
+
+
+#btn-registrar-ponto {
+    padding: 5px;
+    
+}
 
 .modal {
     display: none; 
@@ -23,20 +42,29 @@ body {
 
 
 .modal-content {
+
     background-color: #fff;
-    margin: 15% auto; 
-    padding: 200px;
+    margin: 15% auto;
+    padding: 20px;
     border-radius: 10px;
-    width: 50%;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
+    width: 25vh;
+    height: auto;
     font-family: 'LexendDeca-Regular';
     color: var(--title);
-    font-size: 200%;
+    font-size: 120%;
     position: relative;
+    overflow: auto;
+    flex-direction: column;
+}
+
+.modal-content p {
+    margin: 10px;
+    font-size: 1em;
+}
+
+.modal-content button {
+    padding: 5px;
+    margin-top: auto; 
 }
 
 
@@ -50,7 +78,7 @@ body {
     right: 10px;
     background-color: #e0e0e041;
     padding: 5px 10px;
-    border-radius: 50%;
+    border-radius: 10%;
     border: 2px solid #000000;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -62,4 +90,5 @@ body {
     background-color: #ff0000;
     border-color: #ee0000;
 }
+
 

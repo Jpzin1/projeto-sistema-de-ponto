@@ -1,32 +1,49 @@
 body {
+    
     box-sizing: border-box;
     margin: 0;
-    background-color: #f3f3f3;
+    background-color: #6439FF;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 50px;
+
 }
 
 .data-hora {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     text-align: center;
-    gap: 10px; 
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    font-size: 2em; /* Tamanho da fonte ajustado */
+    font-weight: 500; /* Peso da fonte ajustado */
+    color: #000000; /* Cor do texto */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra sutil ao texto */
+    border-radius: 8px; /* Bordas arredondadas */
+    padding: 15px; /* Espaçamento interno ajustado */
+    display: inline-block; /* Ajusta o contorno do elemento */
+    font-family: "Noto Sans", sans-serif;
+    
 }
 
 .data-hora p {
     margin: 0;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5em;
 }
 
 
 #btn-registrar-ponto {
-    padding: 5px;
-    
+    padding: 15px 30px;
+    font-size: 1.2em;
+    background-color: #ffffff;
+    color: #000000;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
 }
+
 
 .modal {
     display: none; 
@@ -42,19 +59,18 @@ body {
 
 
 .modal-content {
-
-    background-color: #fff;
-    margin: 15% auto;
+    background-color: white;
+    margin: 20% auto; /* Ajusta a posição do modal */
     padding: 20px;
-    border-radius: 10px;
-    width: 25vh;
-    height: auto;
-    font-family: 'LexendDeca-Regular';
-    color: var(--title);
-    font-size: 120%;
+    border: 1px solid #888;
+    width: 20%; /* Ajusta a largura do modal */
+    height: 20%;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     position: relative;
-    overflow: auto;
-    flex-direction: column;
+    align-items: center; /* Centraliza o conteúdo horizontalmente */
+    justify-content: center; /* Centraliza o conteúdo verticalmente */
 }
 
 .modal-content p {
@@ -78,7 +94,7 @@ body {
     right: 10px;
     background-color: #e0e0e041;
     padding: 5px 10px;
-    border-radius: 10%;
+    border-radius: 25%;
     border: 2px solid #000000;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -91,4 +107,27 @@ body {
     border-color: #ee0000;
 }
 
+
+
+#btn-dialog-entrada, #btn-dialog-saida, #btn-dialog-intervalo, #btn-dialog-voltarIntervalo {
+    padding: 8px 15px;
+    margin: 5px;
+    font-size: 1em;
+    background-color: #6439FF;
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#btn-dialog-entrada:hover, #btn-dialog-saida:hover, #btn-dialog-intervalo:hover, #btn-dialog-voltarIntervalo:hover {
+    background-color: #6439FF;
+}
+
+
+#dialog-data, #dialog-hora {
+    font-size: 1.5em; 
+    margin-bottom: 10px;
+}
 

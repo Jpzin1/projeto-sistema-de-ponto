@@ -14,15 +14,21 @@
     </div>
     <button id="btn-registrar-ponto">Registrar ponto</button>
 
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <p id="dialog-data">Data</p>
-            <p id="dialog-hora">Hora</p>
-            <button class="close">&times;</button>
-            <button id="btn-dialog-entrada">Entrada</button>
-            <button id="btn-dialog-saida">Saída</button>
-        </div>
-    </div>
+    <!-- Dialog -->
+    <dialog id="dialog-ponto">
+        <span class="close" id="dialog-fechar">&times;</span> <!-- Botão para fechar o dialog -->
+        <p id="dialog-data">Data</p>
+        <p id="dialog-hora">Hora</p>
+        <select id="dialog-select">
+            <option value="entrada">Entrada</option>
+            <option value="intervalo">Intervalo</option>
+            <option value="volta-intervalo">Volta Intervalo</option>
+            <option value="saida">Saída</option>
+        </select>
+        <button id="btn-dialog-register">Registrar</button>
+
+    </dialog>
+
     <script src="index.js"></script>
 </body>
 </html>

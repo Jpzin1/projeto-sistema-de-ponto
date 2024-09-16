@@ -1,30 +1,105 @@
-navigator.geolocation.getCurrentPosition((position) => {
-    console.log(position);
-    console.log(position.coords.latitude);
-    console.log(position.coords.longitude);
-});
+/////////////////////////// Funções de Geolocalização e Registro ///////////////////////////
 
-var modal = document.getElementById("modal");
-var btn = document.getElementById("btn-registrar-ponto");
-var span = document.getElementsByClassName("close")[0];
-var btnEntrada = document.getElementById("btn-dialog-entrada");
-var btnSaida = document.getElementById("btn-dialog-saida");
-
-btn.onclick = function() {
-    modal.style.display = "block";
-    updateContentHour(); 
+// Transformar a função getUserLocation em uma função assíncrona
+async function getUserLocation() {
+    return new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                let userLocation = {
+                    "lat": position.coords.latitude,
+                    "long": position.coords.longitude
+                };
+                console.log("Localização do usuário obtida:", userLocation); // Log para verificar a localização
+                resolve(userLocation); // Retornar a localização
+            },
+            (error) => {
+                console.error("Erro ao obter a localização:", error); // Lidar com o erro
+                reject(error); // Rejeitar a Promise
+            }
+        );
+    });
 }
 
-span.onclick = function() {
-    modal.style.display = "none";
-}
+// Função para criar o objeto de registro
+// Função para criar o objeto de registro
+async function getObjectRegister(registerType) {
+    try {
+        console.log("Obtendo localização do usuário...");
+        const location = await getUserLocation(); // Espera a localização do usuário
+        console.log("Localização obtida:", location); // Adicione log aqui
 
-window.onkeydown = function (event) {
-    if (event.key === "Escape") {
-        modal.style.display = "none";
+        // Verifique se o tipo de registro é válido
+        const validTypes = ['entrada', 'saida', 'intervalo', 'volta-intervalo'];
+        if (!validTypes.includes(registerType)) {
+            throw new Error(`Tipo de registro inválido: ${registerType}`);
+        }
+
+        let ponto = {
+            "date": getCurrentDate(),
+            "time": getCurrentTime(),
+            "location": location,  // Agora está pegando a localização correta
+            "id": 1,  // Ajustar o ID conforme necessário
+            "type": registerType
+        };
+
+        // Log detalhado incluindo tipo de registro
+        console.log(`Registro criado: 
+            Data: ${ponto.date}, 
+            Hora: ${ponto.time}, 
+            Localização: Lat: ${ponto.location.lat}, Long: ${ponto.location.long}, 
+            Tipo: ${ponto.type}, 
+            ID: ${ponto.id}`);
+
+        return ponto;
+    } catch (error) {
+        console.error("Erro ao criar o registro:", error);
     }
 }
 
+
+// Função para salvar o registro no LocalStorage
+function saveRegisterLocalStorage(register) {
+    let registros = JSON.parse(localStorage.getItem("registers")) || []; // Recupera os registros existentes
+    registros.push(register); // Adiciona o novo registro
+    localStorage.setItem("registers", JSON.stringify(registros)); // Salva o array atualizado
+    console.log("Registro salvo no localStorage:", register); // Log confirmando o salvamento
+}
+
+// Função para obter os registros salvos
+function getRegisterLocalStorage() {
+    const registros = JSON.parse(localStorage.getItem("registers")) || [];
+    console.log("Registros recuperados do localStorage:", registros); // Log dos registros
+    return registros;
+}
+
+/////////////////////////// Ações dos Botões de Registro ///////////////////////////
+
+// Botão de registro de ponto
+const btnRegistrarPonto = document.getElementById("btn-registrar-ponto");
+btnRegistrarPonto.addEventListener("click", () => {
+    const dialogPonto = document.getElementById("dialog-ponto");
+    dialogPonto.showModal();
+    updateContentHour();
+});
+
+// Botão para fechar o dialog
+const btnDialogFechar = document.getElementById("dialog-fechar");
+btnDialogFechar.addEventListener("click", () => {
+    const dialogPonto = document.getElementById("dialog-ponto");
+    dialogPonto.close(); // Fecha o dialog
+});
+
+// Fechar o dialog ao pressionar "Esc"
+window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+        const dialogPonto = document.getElementById("dialog-ponto");
+        dialogPonto.close();
+    }
+});
+
+/////////////////////////// Dialog e Atualização de Conteúdo ///////////////////////////
+
+// Atualiza o conteúdo do dialog com data e hora
 function updateContentHour() {
     const dialogDate = document.getElementById("dialog-data");
     const dialogTime = document.getElementById("dialog-hora");
@@ -65,5 +140,26 @@ function getWeekDay() {
     return diasSemana[d.getDay()];
 }
 
-// Atualiza o conteúdo do modal a cada segundo
+// Atualiza o conteúdo do dialog a cada segundo
 setInterval(updateContentHour, 1000);
+
+/////////////////////////// Manipulação do Tipo de Registro ///////////////////////////
+
+// Seleção do tipo de registro
+
+const selectRegisterType = document.getElementById("dialog-select");
+
+// Botão para salvar o registro selecionado
+const btnDialogRegister = document.getElementById("btn-dialog-register");
+
+if (btnDialogRegister) {
+    btnDialogRegister.addEventListener("click", async () => {
+        const registerType = selectRegisterType ? selectRegisterType.value : 'entrada'; // Valor padrão se não houver selectRegisterType
+        const registro = await getObjectRegister(registerType);
+        if (registro) {
+            saveRegisterLocalStorage(registro);
+        }
+        localStorage.setItem("lastRegisterType", registerType); // Salva o último tipo de registro
+    });
+
+}

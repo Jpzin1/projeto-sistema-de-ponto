@@ -21,7 +21,6 @@ async function getUserLocation() {
 }
 
 // Função para criar o objeto de registro
-// Função para criar o objeto de registro
 async function getObjectRegister(registerType) {
     try {
         console.log("Obtendo localização do usuário...");
@@ -55,7 +54,6 @@ async function getObjectRegister(registerType) {
         console.error("Erro ao criar o registro:", error);
     }
 }
-
 
 // Função para salvar o registro no LocalStorage
 function saveRegisterLocalStorage(register) {
@@ -146,8 +144,41 @@ setInterval(updateContentHour, 1000);
 /////////////////////////// Manipulação do Tipo de Registro ///////////////////////////
 
 // Seleção do tipo de registro
-
 const selectRegisterType = document.getElementById("dialog-select");
+
+// Selecionar o provável tipo do próximo registro
+function setRegisterType() {
+    const lastRegisterType = localStorage.getItem("lastRegisterType") || 'entrada'; // Valor padrão se não houver tipo de registro
+    const tipoRegistroMap = {
+        'entrada': 'intervalo',
+        'intervalo': 'volta-intervalo',
+        'volta-intervalo': 'saida',
+        'saida': 'entrada'
+    };
+
+    const proximoTipo = tipoRegistroMap[lastRegisterType] || 'entrada'; // Valor padrão 'entrada' se não houver mapeamento
+    if (selectRegisterType) {
+        selectRegisterType.value = proximoTipo;
+    }
+
+    console.log("Tipo de registro atualizado para:", proximoTipo); // Log para verificar o valor atualizado
+}
+
+// Atualiza o valor do select quando a página é carregada
+document.addEventListener('DOMContentLoaded', () => {
+    setRegisterType();
+});
+
+function showMessage(message, isSuccess) {
+    const messageElement = document.getElementById("message");
+    messageElement.textContent = message;
+    messageElement.style.backgroundColor = isSuccess ? 'lightgreen' : 'lightcoral';
+    messageElement.style.display = 'block';
+
+    setTimeout(() => {
+        messageElement.style.display = 'none';
+    }, 3000);
+}
 
 // Botão para salvar o registro selecionado
 const btnDialogRegister = document.getElementById("btn-dialog-register");
@@ -158,8 +189,9 @@ if (btnDialogRegister) {
         const registro = await getObjectRegister(registerType);
         if (registro) {
             saveRegisterLocalStorage(registro);
+            localStorage.setItem("lastRegisterType", registerType); // Salva o último tipo de registro
+            setRegisterType(); // Atualiza o tipo de registro para o próximo
+            document.getElementById("dialog-ponto").close(); // Fecha o dialog
         }
-        localStorage.setItem("lastRegisterType", registerType); // Salva o último tipo de registro
     });
-
 }

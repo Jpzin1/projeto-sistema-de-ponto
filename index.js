@@ -169,16 +169,25 @@ document.addEventListener('DOMContentLoaded', () => {
     setRegisterType();
 });
 
-function showMessage(message, isSuccess) {
-    const messageElement = document.getElementById("message");
-    messageElement.textContent = message;
-    messageElement.style.backgroundColor = isSuccess ? 'lightgreen' : 'lightcoral';
-    messageElement.style.display = 'block';
+/////////////////////////// Função para Mostrar Mensagens ///////////////////////////
 
-    setTimeout(() => {
-        messageElement.style.display = 'none';
-    }, 3000);
+// Função para mostrar mensagens
+function showMessage(message, isSuccess) {
+    console.log("Mostrar mensagem:", message); // Adicione este log para verificar se a função é chamada
+    const messageElement = document.getElementById("message");
+    if (messageElement) {
+        messageElement.textContent = message;
+        messageElement.style.display = 'block'; // Torna a mensagem visível
+
+        setTimeout(() => {
+            messageElement.style.display = 'none'; // Esconde após 3 segundos
+        }, 5000);
+    } else {
+        console.error("Elemento de mensagem não encontrado.");
+    }
 }
+
+/////////////////////////// Ação do Botão de Registro ///////////////////////////
 
 // Botão para salvar o registro selecionado
 const btnDialogRegister = document.getElementById("btn-dialog-register");
@@ -192,6 +201,11 @@ if (btnDialogRegister) {
             localStorage.setItem("lastRegisterType", registerType); // Salva o último tipo de registro
             setRegisterType(); // Atualiza o tipo de registro para o próximo
             document.getElementById("dialog-ponto").close(); // Fecha o dialog
+            showMessage("Registro salvo com sucesso!", true); // Mostrar mensagem de sucesso
+        } else {
+            showMessage("Erro ao salvar o registro!", false); // Mostrar mensagem de erro
         }
     });
+} else {
+    console.error("Botão de registro não encontrado.");
 }

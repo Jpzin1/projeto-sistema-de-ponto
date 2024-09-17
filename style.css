@@ -131,3 +131,23 @@ body {
     margin-bottom: 10px;
 }
 
+#message {
+    display: none; 
+    padding: 30px;
+    border-radius: 25px;
+    background-color: #faf9ff;
+    position: fixed;
+    bottom: 150px; /* Ajuste conforme necessário */
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto; /* Ajusta a largura automaticamente */
+    max-width: 300px; /* Define um máximo para a largura */
+    min-width: 200px; /* Define um mínimo para a largura */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Adiciona uma sombra para destacar */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1000; /* Garante que a mensagem esteja sobre outros elementos */
+    font-size: 125%;
+}
+

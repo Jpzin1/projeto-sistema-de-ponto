@@ -172,30 +172,45 @@ document.addEventListener('DOMContentLoaded', () => {
 /////////////////////////// Função para Mostrar Mensagens ///////////////////////////
 
 
-
-
 // Função para mostrar mensagens
 function showMessage(message, isSuccess) {
-    console.log("Mostrar mensagem:", message); // Adicione este log para verificar se a função é chamada
+    console.log("Mostrar mensagem:", message); 
     const messageElement = document.getElementById("message");
+    const closeMessage = document.getElementById("close-message");
+
     if (messageElement) {
-        messageElement.textContent = message;
-        messageElement.style.display = 'block'; // Torna a mensagem visível
+        const messageContent = document.getElementById("message-content");
+        if (messageContent) {
+            messageContent.textContent = message;
+        }
+
+        
+        messageElement.classList.toggle("sucesso", isSuccess);
+        messageElement.classList.toggle("error", !isSuccess);
+
+        messageElement.style.display = 'flex'; 
+
+        if (closeMessage) {
+            closeMessage.addEventListener("click", () => {
+                messageElement.style.display = 'none';
+            });
+        }
 
         setTimeout(() => {
-            messageElement.style.display = 'none'; // Esconde após 5 segundos
-        }, 5000);
+            messageElement.style.display = 'none'; 
+        }, 3000);
     } else {
         console.error("Elemento de mensagem não encontrado.");
     }
 }
+
 
 /////////////////////////// Função para Atualizar a Tabela de Histórico ///////////////////////////
 
 // Função para atualizar a tabela de histórico
 function updateHistoricoTable() {
     const tabelaHistorico = document.getElementById('historico-table').getElementsByTagName('tbody')[0];
-    tabelaHistorico.innerHTML = ''; // Limpa a tabela antes de adicionar novos registros
+    tabelaHistorico.innerHTML = ''; 
 
     const registros = getRegisterLocalStorage();
     registros.forEach((registro) => {
@@ -237,7 +252,22 @@ btnFecharHistorico.addEventListener("click", () => {
     }
 });
 
+const btnLimparHistorico = document.getElementById("btn-limpar-historico"); // Corrigi o ID aqui também
 
+if (btnLimparHistorico) {
+    btnLimparHistorico.addEventListener("click", () => {
+        // Remove os registros do localStorage
+        localStorage.removeItem("registers");
+
+        
+        updateHistoricoTable();
+
+        
+        showMessage("Histórico limpo com sucesso!", true);
+    });
+} else {
+    console.error("Botão de limpar histórico não encontrado.");
+}
 
 /////////////////////////// Ação do Botão de Registro ///////////////////////////
 
@@ -261,3 +291,7 @@ if (btnDialogRegister) {
 } else {
     console.error("Botão de registro não encontrado.");
 }
+
+
+
+

@@ -31,7 +31,6 @@
     </dialog>
 
     <dialog id="dialog-historico">
-        <span class="close" id="dialog-historico-fechar">&times;</span>
         <h2>Histórico de Registros</h2>
         <table id="historico-table">
             <thead>
@@ -46,9 +45,13 @@
             </tbody>
         </table>
         <button id="btn-fechar-historico">Fechar</button>
+        <button id="btn-limpar-historico">Limpar Histórico</button>
     </dialog>
 
-    <div id="message" style="display: none;"></div>
+    <div id="message" style="display: none;">
+        <span id="close-message">&times;</span>
+        <span id="message-content"></span>
+    </div>
 
     <script src="index.js"></script>
 </body>

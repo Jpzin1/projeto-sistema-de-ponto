@@ -37,7 +37,7 @@ async function getObjectRegister(registerType) {
             "date": getCurrentDate(),
             "time": getCurrentTime(),
             "location": location,  // Agora está pegando a localização correta
-            "id": 1,  // Ajustar o ID conforme necessário
+            "id": Date.now(),  // Usar timestamp para ID único
             "type": registerType
         };
 
@@ -171,6 +171,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /////////////////////////// Função para Mostrar Mensagens ///////////////////////////
 
+
+
+
 // Função para mostrar mensagens
 function showMessage(message, isSuccess) {
     console.log("Mostrar mensagem:", message); // Adicione este log para verificar se a função é chamada
@@ -180,12 +183,61 @@ function showMessage(message, isSuccess) {
         messageElement.style.display = 'block'; // Torna a mensagem visível
 
         setTimeout(() => {
-            messageElement.style.display = 'none'; // Esconde após 3 segundos
+            messageElement.style.display = 'none'; // Esconde após 5 segundos
         }, 5000);
     } else {
         console.error("Elemento de mensagem não encontrado.");
     }
 }
+
+/////////////////////////// Função para Atualizar a Tabela de Histórico ///////////////////////////
+
+// Função para atualizar a tabela de histórico
+function updateHistoricoTable() {
+    const tabelaHistorico = document.getElementById('historico-table').getElementsByTagName('tbody')[0];
+    tabelaHistorico.innerHTML = ''; // Limpa a tabela antes de adicionar novos registros
+
+    const registros = getRegisterLocalStorage();
+    registros.forEach((registro) => {
+        const novaLinha = tabelaHistorico.insertRow();
+        
+        const celulaData = novaLinha.insertCell();
+        celulaData.textContent = registro.date;
+        
+        const celulaHora = novaLinha.insertCell();
+        celulaHora.textContent = registro.time;
+        
+        
+        
+        const celulaTipo = novaLinha.insertCell();
+        celulaTipo.textContent = registro.type;
+    });
+}
+
+
+const btnHistorico = document.getElementById("btn-historico");
+btnHistorico.addEventListener("click", () => {
+    const dialogHistorico = document.getElementById("dialog-historico");
+    if (dialogHistorico) {
+        dialogHistorico.showModal();
+        updateHistoricoTable(); 
+    } else {
+        console.error("Dialog Histórico não encontrado.");
+    }
+});
+
+
+const btnFecharHistorico = document.getElementById("btn-fechar-historico");
+btnFecharHistorico.addEventListener("click", () => {
+    const dialogHistorico = document.getElementById("dialog-historico");
+    if (dialogHistorico) {
+        dialogHistorico.close();
+    } else {
+        console.error("Dialog Histórico não encontrado.");
+    }
+});
+
+
 
 /////////////////////////// Ação do Botão de Registro ///////////////////////////
 

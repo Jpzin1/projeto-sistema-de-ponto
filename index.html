@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Ponto Eletrônico</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+
 </head>
 <body>
     <div class="data-hora">
@@ -13,8 +15,8 @@
         <p id="hora-atual"></p>
     </div>
     <button id="btn-registrar-ponto">Registrar ponto</button>
+    <button id="btn-historico">Histórico</button>
 
-    
     <dialog id="dialog-ponto">
         <span class="close" id="dialog-fechar">&times;</span>
         <p id="dialog-data">Data</p>
@@ -27,7 +29,25 @@
         </select>
         <button id="btn-dialog-register">Registrar</button>
     </dialog>
-    
+
+    <dialog id="dialog-historico">
+        <span class="close" id="dialog-historico-fechar">&times;</span>
+        <h2>Histórico de Registros</h2>
+        <table id="historico-table">
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Hora</th>
+                    <th>Tipo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Registros serão exibidos aqui-->
+            </tbody>
+        </table>
+        <button id="btn-fechar-historico">Fechar</button>
+    </dialog>
+
     <div id="message" style="display: none;"></div>
 
     <script src="index.js"></script>

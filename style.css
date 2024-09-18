@@ -178,17 +178,16 @@ body {
 select {
     padding: 10px;
     font-size: 1em;
-    background-color: #ffffff;
-    border: 2px solid #000000;
+    background-color: #6439FF;
     border-radius: 8px;
-    color: #000000;
+    color: #ffffff;
     cursor: pointer;
-    appearance: none; 
+    
     transition: background-color 0.3s ease, transform 0.3s ease;
     margin-right: 10px;
     font-family: "Raleway", sans-serif;
     position: relative;
-    padding-right: 10px;
+    
 }
 
 select::after {
@@ -201,26 +200,26 @@ select::after {
 }
 
 select:hover {
-    background-color: #ffffff;
+    background-color: #6439FF;
     transform: scale(1.05);
 }
 
 button {
     padding: 10px;
     font-size: 1em;
-    background-color: #ffffff;
-    border: 2px solid #000000;
+    background-color: #6439FF;
     border-radius: 8px;
-    color: #000000;
+    color: #ffffff;
     cursor: pointer;
     appearance: none; 
     transition: background-color 0.3s ease, transform 0.3s ease;
     margin-right: 10px;
     font-family: "Raleway", sans-serif;
+    
 }
 
 button:hover {
-    background-color: #ffffff;
+    background-color: #6439FF;
     transform: scale(1.05);
 }
 
@@ -305,6 +304,45 @@ dialog::-webkit-details-marker {
     background-color: #6439FF;
 }
 
+#btn-registrar-justificativa {
+    padding: 15px 30px;
+    font-size: 150%;
+    background-color: #ffffff;
+    color: #000000;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-family: "Raleway", sans-serif;
+    margin: 10px;
+}
+
+button[type="submit"] {
+    font-size: 85%;
+}
+
+#data-justificativa {
+    padding: 5px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    font-size: 16px; 
+    transition: border-color 0.3s; 
+}
+
+input[type="date"]:focus {
+    border-color: #006ee4; 
+    outline: none; 
+}
+
+input[type="date"] {
+    font-size: 100%;
+    color: #000000;
+}
+
+
+#btn-fechar-justificativa {
+    
+}
 
 
 

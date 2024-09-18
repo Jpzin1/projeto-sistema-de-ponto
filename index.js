@@ -269,6 +269,50 @@ if (btnLimparHistorico) {
     console.error("Botão de limpar histórico não encontrado.");
 }
 
+/////////////////////////// Registrar Justificativa ///////////////////////////
+
+const justificativas = [];
+
+
+document.getElementById('btn-registrar-justificativa').addEventListener('click', () => {
+    document.getElementById('dialog-justificativa').showModal();
+});
+
+
+document.getElementById('justificativaForm').addEventListener('submit', function(event) { 
+    event.preventDefault();
+
+    const data = document.getElementById('data-justificativa').value;
+    const justificativa = document.getElementById('justificativa').value;
+
+    const registro = {
+        data: data,
+        justificativa: justificativa,
+        id: justificativas.length + 1 
+    };
+
+    justificativas.push(registro);
+    document.getElementById('dialog-justificativa').close(); 
+    mostrarJustificativas();
+});
+
+
+function mostrarJustificativas() {
+    const lista = document.getElementById('justificativasList');
+    lista.innerHTML = '';
+
+    justificativas.forEach(j => {
+        const item = document.createElement('li');
+        item.textContent = `Data: ${j.data} - Justificativa: ${j.justificativa}`;
+        lista.appendChild(item);
+    });
+}
+
+
+document.getElementById('btn-fechar-justificativa').addEventListener('click', () => {
+    document.getElementById('dialog-justificativa').close();
+});
+
 /////////////////////////// Ação do Botão de Registro ///////////////////////////
 
 // Botão para salvar o registro selecionado

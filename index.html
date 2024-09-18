@@ -6,7 +6,6 @@
     <title>Sistema de Ponto Eletrônico</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
-
 </head>
 <body>
     <div class="data-hora">
@@ -16,6 +15,7 @@
     </div>
     <button id="btn-registrar-ponto">Registrar ponto</button>
     <button id="btn-historico">Histórico</button>
+    <button id="btn-registrar-justificativa">Registrar Justificativa</button> 
 
     <dialog id="dialog-ponto">
         <span class="close" id="dialog-fechar">&times;</span>
@@ -47,6 +47,25 @@
         <button id="btn-fechar-historico">Fechar</button>
         <button id="btn-limpar-historico">Limpar Histórico</button>
     </dialog>
+
+    <dialog id="dialog-justificativa">
+        <h2>Registro de Justificativa</h2>
+        <form id="justificativaForm">
+            <label for="data-justificativa">Data:</label>
+            <input type="date" id="data-justificativa" required>
+
+            <label for="justificativa">Justificativa:</label>
+            <textarea id="justificativa" required></textarea>
+
+            <button type="submit">Enviar Justificativa</button>
+        </form>
+        <button id="btn-fechar-justificativa">Fechar</button>
+    </dialog>
+
+    <div id="lista-justificativa">
+        <h3>Justificativas Registradas</h3>
+        <ul id="justificativasList"></ul>
+    </div>
 
     <div id="message" style="display: none;">
         <span id="close-message">&times;</span>

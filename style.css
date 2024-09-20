@@ -322,11 +322,11 @@ button[type="submit"] {
 }
 
 #data-justificativa {
-    padding: 5px; 
-    border: 1px solid #ccc; 
+    padding: 8px; 
     border-radius: 5px; 
     font-size: 16px; 
-    transition: border-color 0.3s; 
+    color: #000000; 
+    
 }
 
 input[type="date"]:focus {
@@ -337,11 +337,17 @@ input[type="date"]:focus {
 input[type="date"] {
     font-size: 100%;
     color: #000000;
+    
 }
 
 
-#btn-fechar-justificativa {
+#justificativa {
     
+    padding: 10px; 
+    border-radius: 5px; 
+    font-size: 16px; 
+    color: #000000; 
+      
 }
 
 

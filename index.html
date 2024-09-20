@@ -49,23 +49,20 @@
     </dialog>
 
     <dialog id="dialog-justificativa">
+        <span class="close" id="dialog-fechar-justificativa">&times;</span>
         <h2>Registro de Justificativa</h2>
         <form id="justificativaForm">
             <label for="data-justificativa">Data:</label>
             <input type="date" id="data-justificativa" required>
 
             <label for="justificativa">Justificativa:</label>
-            <textarea id="justificativa" required></textarea>
+            <input type="text" id="justificativa" required>
 
-            <button type="submit">Enviar Justificativa</button>
+            <button type="submit">Enviar</button>
         </form>
-        <button id="btn-fechar-justificativa">Fechar</button>
-    </dialog>
-
-    <div id="lista-justificativa">
         <h3>Justificativas Registradas</h3>
         <ul id="justificativasList"></ul>
-    </div>
+    </dialog>
 
     <div id="message" style="display: none;">
         <span id="close-message">&times;</span>

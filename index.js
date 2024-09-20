@@ -282,11 +282,18 @@ document.getElementById('btn-registrar-justificativa').addEventListener('click',
 document.getElementById('justificativaForm').addEventListener('submit', function(event) { 
     event.preventDefault();
 
-    const data = document.getElementById('data-justificativa').value;
+    
+    const dataInput = document.getElementById('data-justificativa').value;
+    const dataFormatada = new Date(dataInput);
+    const dia = ('0' + dataFormatada.getDate()).slice(-2);
+    const mes = ('0' + (dataFormatada.getMonth() + 1)).slice(-2);
+    const ano = dataFormatada.getFullYear();
+    const data = `${dia}/${mes}/${ano}`;
+
     const justificativa = document.getElementById('justificativa').value;
 
     const registro = {
-        data: data,
+        data: data, 
         justificativa: justificativa,
         id: justificativas.length + 1 
     };
@@ -295,7 +302,6 @@ document.getElementById('justificativaForm').addEventListener('submit', function
     document.getElementById('dialog-justificativa').close(); 
     mostrarJustificativas();
 });
-
 
 function mostrarJustificativas() {
     const lista = document.getElementById('justificativasList');
@@ -309,8 +315,11 @@ function mostrarJustificativas() {
 }
 
 
-document.getElementById('btn-fechar-justificativa').addEventListener('click', () => {
-    document.getElementById('dialog-justificativa').close();
+const dialogFecharJustificativa = document.getElementById('dialog-fechar-justificativa');
+const dialogJustificativa = document.getElementById('dialog-justificativa');
+
+dialogFecharJustificativa.addEventListener('click', () => {
+dialogJustificativa.close();
 });
 
 /////////////////////////// Ação do Botão de Registro ///////////////////////////

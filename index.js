@@ -269,15 +269,7 @@ if (btnLimparHistorico) {
     console.error("Botão de limpar histórico não encontrado.");
 }
 
-/////////////////////////// Registrar Justificativa ///////////////////////////
-
-const justificativas = [];
-
-
-document.getElementById('btn-registrar-justificativa').addEventListener('click', () => {
-    document.getElementById('dialog-justificativa').showModal();
-});
-
+/////////////////////////// Botão para levar para a prox pag ///////////////////////////
 
 const btnVerInfo = document.getElementById("btn-ver-info");
 
@@ -289,51 +281,6 @@ if (btnVerInfo) {
 } else {
     console.error("Botão 'Mais informações' não encontrado.");
 }
-
-
-
-document.getElementById('justificativaForm').addEventListener('submit', function(event) { 
-    event.preventDefault();
-
-    
-    const dataInput = document.getElementById('data-justificativa').value;
-    const dataFormatada = new Date(dataInput);
-    const dia = ('0' + dataFormatada.getDate()).slice(-2);
-    const mes = ('0' + (dataFormatada.getMonth() + 1)).slice(-2);
-    const ano = dataFormatada.getFullYear();
-    const data = `${dia}/${mes}/${ano}`;
-
-    const justificativa = document.getElementById('justificativa').value;
-
-    const registro = {
-        data: data, 
-        justificativa: justificativa,
-        id: justificativas.length + 1 
-    };
-
-    justificativas.push(registro);
-    document.getElementById('dialog-justificativa').close(); 
-    mostrarJustificativas();
-});
-
-function mostrarJustificativas() {
-    const lista = document.getElementById('justificativasList');
-    lista.innerHTML = '';
-
-    justificativas.forEach(j => {
-        const item = document.createElement('li');
-        item.textContent = `Data: ${j.data} - Justificativa: ${j.justificativa}`;
-        lista.appendChild(item);
-    });
-}
-
-
-const dialogFecharJustificativa = document.getElementById('dialog-fechar-justificativa');
-const dialogJustificativa = document.getElementById('dialog-justificativa');
-
-dialogFecharJustificativa.addEventListener('click', () => {
-dialogJustificativa.close();
-});
 
 /////////////////////////// Ação do Botão de Registro ///////////////////////////
 

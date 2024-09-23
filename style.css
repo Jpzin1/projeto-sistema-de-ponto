@@ -19,7 +19,7 @@ body {
     border-radius: 8px; 
     padding: 15px; 
     display: inline-block; 
-    font-family: "Raleway", sans-serif;
+    font-family: "Comfortaa", sans-serif;
     
     
 }
@@ -29,6 +29,7 @@ body {
     text-align: center;
     margin-bottom: 20px;
     font-size: 1.5em;
+     
 }
 
 
@@ -317,6 +318,20 @@ dialog::-webkit-details-marker {
     margin: 10px;
 }
 
+#btn-ver-info {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #6439FF;
+    color: #ffffff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#btn-ver-info:hover {
+    background-color: #6439FF;
+}
+
 button[type="submit"] {
     font-size: 85%;
 }
@@ -342,7 +357,6 @@ input[type="date"] {
 
 
 #justificativa {
-    
     padding: 10px; 
     border-radius: 5px; 
     font-size: 16px; 

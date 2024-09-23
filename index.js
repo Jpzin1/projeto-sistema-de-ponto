@@ -279,6 +279,19 @@ document.getElementById('btn-registrar-justificativa').addEventListener('click',
 });
 
 
+const btnVerInfo = document.getElementById("btn-ver-info");
+
+if (btnVerInfo) {
+    btnVerInfo.addEventListener("click", () => {
+        
+        window.location.href = "info.html"; 
+    });
+} else {
+    console.error("Botão 'Mais informações' não encontrado.");
+}
+
+
+
 document.getElementById('justificativaForm').addEventListener('submit', function(event) { 
     event.preventDefault();
 

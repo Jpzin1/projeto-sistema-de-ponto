@@ -48,7 +48,14 @@
             </select>
         </p>
 
+        <p class="input-container">
+            <label for="file-upload">Anexar Arquivo(s):</label>
+            <input type="file" id="file-upload" accept=".pdf, .jpg, .png, .jpeg" multiple>
+        </p>
+
+
         <button id="btn-dialog-register">Registrar</button>
+        <button id="btn-dialog-exit">Fechar</button>
     </dialog>
 
     <dialog id="dialog-historico">
@@ -60,6 +67,7 @@
                     <th>Hora</th>
                     <th>Tipo</th>
                     <th>Justificativa</th> <!-- Adicionando coluna para a justificativa -->
+                    <th>Comprovante</th>
                 </tr>
             </thead>
             <tbody>

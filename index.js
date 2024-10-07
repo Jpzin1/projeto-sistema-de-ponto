@@ -32,9 +32,31 @@ async function getObjectRegister(registerType) {
             throw new Error(`Tipo de registro inválido: ${registerType}`);
         }
 
-        
         const justificativaInput = document.getElementById("justificativa-select");
-        const justificativa = justificativaInput ? justificativaInput.value.trim() : null; 
+        const justificativa = justificativaInput ? justificativaInput.value.trim() : null;
+
+        // Obtendo arquivos anexados
+        const fileInput = document.getElementById("file-upload");
+        let comprovantes = [];
+        if (fileInput && fileInput.files.length > 0) {
+            const filePromises = Array.from(fileInput.files).map(file => {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        // Criando um Blob a partir do arquivo
+                        const blob = new Blob([e.target.result], { type: file.type });
+                        const url = URL.createObjectURL(blob);
+                        resolve({ url: url, name: file.name }); // Armazena URL e nome do arquivo
+                    };
+                    reader.onerror = (error) => {
+                        console.error("Erro ao ler o arquivo:", error);
+                        reject(error);
+                    };
+                    reader.readAsArrayBuffer(file); // Lê o arquivo como ArrayBuffer para criar o Blob
+                });
+            });
+            comprovantes = await Promise.all(filePromises); // Aguarda todas as promessas
+        }
 
         let ponto = {
             "date": getCurrentDate(),
@@ -42,7 +64,8 @@ async function getObjectRegister(registerType) {
             "location": location,
             "id": Date.now(),
             "type": registerType,
-            "justificativa": justificativa 
+            "justificativa": justificativa,
+            "comprovantes": comprovantes // Incluindo os comprovantes como URLs
         };
 
         console.log(`Registro criado: 
@@ -51,6 +74,7 @@ async function getObjectRegister(registerType) {
             Localização: Lat: ${ponto.location.lat}, Long: ${ponto.location.long}, 
             Tipo: ${ponto.type}, 
             Justificativa: ${ponto.justificativa}, 
+            Comprovantes: ${ponto.comprovantes.map(c => c.name).join(', ')}, 
             ID: ${ponto.id}`);
 
         return ponto;
@@ -206,7 +230,7 @@ function showMessage(message, isSuccess) {
 // Função para atualizar a tabela de histórico
 function updateHistoricoTable() {
     const tabelaHistorico = document.getElementById('historico-table').getElementsByTagName('tbody')[0];
-    tabelaHistorico.innerHTML = ''; 
+    tabelaHistorico.innerHTML = '';
 
     const registros = getRegisterLocalStorage();
     registros.forEach((registro) => {
@@ -223,6 +247,21 @@ function updateHistoricoTable() {
 
         const celulaJustificativa = novaLinha.insertCell();
         celulaJustificativa.textContent = registro.justificativa ? registro.justificativa : 'N/A'; 
+
+        const celulaComprovantes = novaLinha.insertCell();
+        if (registro.comprovantes && registro.comprovantes.length > 0) {
+            registro.comprovantes.forEach(comprovante => {
+                const link = document.createElement('a');
+                link.href = comprovante.url; 
+                link.textContent = comprovante.name; // Usando o nome do arquivo como texto do link
+                
+                // Remove a abertura do link em nova aba
+                celulaComprovantes.appendChild(link);
+                celulaComprovantes.appendChild(document.createElement('br'));
+            });
+        } else {
+            celulaComprovantes.textContent = 'N/A';
+        }
     });
 }
 

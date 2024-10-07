@@ -9,12 +9,12 @@ async function getUserLocation() {
                     "lat": position.coords.latitude,
                     "long": position.coords.longitude
                 };
-                console.log("Localização do usuário obtida:", userLocation); // Log para verificar a localização
-                resolve(userLocation); // Retornar a localização
+                console.log("Localização do usuário obtida:", userLocation);
+                resolve(userLocation);
             },
             (error) => {
-                console.error("Erro ao obter a localização:", error); // Lidar com o erro
-                reject(error); // Rejeitar a Promise
+                console.error("Erro ao obter a localização:", error);
+                reject(error);
             }
         );
     });
@@ -24,29 +24,33 @@ async function getUserLocation() {
 async function getObjectRegister(registerType) {
     try {
         console.log("Obtendo localização do usuário...");
-        const location = await getUserLocation(); // Espera a localização do usuário
-        console.log("Localização obtida:", location); // Adicione log aqui
+        const location = await getUserLocation();
+        console.log("Localização obtida:", location);
 
-        // Verifique se o tipo de registro é válido
         const validTypes = ['entrada', 'saida', 'intervalo', 'volta-intervalo'];
         if (!validTypes.includes(registerType)) {
             throw new Error(`Tipo de registro inválido: ${registerType}`);
         }
 
+        
+        const justificativaInput = document.getElementById("justificativa-select");
+        const justificativa = justificativaInput ? justificativaInput.value.trim() : null; 
+
         let ponto = {
             "date": getCurrentDate(),
             "time": getCurrentTime(),
-            "location": location,  // Agora está pegando a localização correta
-            "id": Date.now(),  // Usar timestamp para ID único
-            "type": registerType
+            "location": location,
+            "id": Date.now(),
+            "type": registerType,
+            "justificativa": justificativa 
         };
 
-        // Log detalhado incluindo tipo de registro
         console.log(`Registro criado: 
             Data: ${ponto.date}, 
             Hora: ${ponto.time}, 
             Localização: Lat: ${ponto.location.lat}, Long: ${ponto.location.long}, 
             Tipo: ${ponto.type}, 
+            Justificativa: ${ponto.justificativa}, 
             ID: ${ponto.id}`);
 
         return ponto;
@@ -55,18 +59,19 @@ async function getObjectRegister(registerType) {
     }
 }
 
+
 // Função para salvar o registro no LocalStorage
 function saveRegisterLocalStorage(register) {
-    let registros = JSON.parse(localStorage.getItem("registers")) || []; // Recupera os registros existentes
-    registros.push(register); // Adiciona o novo registro
-    localStorage.setItem("registers", JSON.stringify(registros)); // Salva o array atualizado
-    console.log("Registro salvo no localStorage:", register); // Log confirmando o salvamento
+    let registros = JSON.parse(localStorage.getItem("registers")) || [];
+    registros.push(register);
+    localStorage.setItem("registers", JSON.stringify(registros));
+    console.log("Registro salvo no localStorage:", register);
 }
 
 // Função para obter os registros salvos
 function getRegisterLocalStorage() {
     const registros = JSON.parse(localStorage.getItem("registers")) || [];
-    console.log("Registros recuperados do localStorage:", registros); // Log dos registros
+    console.log("Registros recuperados do localStorage:", registros);
     return registros;
 }
 
@@ -84,7 +89,7 @@ btnRegistrarPonto.addEventListener("click", () => {
 const btnDialogFechar = document.getElementById("dialog-fechar");
 btnDialogFechar.addEventListener("click", () => {
     const dialogPonto = document.getElementById("dialog-ponto");
-    dialogPonto.close(); // Fecha o dialog
+    dialogPonto.close();
 });
 
 // Fechar o dialog ao pressionar "Esc"
@@ -97,7 +102,6 @@ window.addEventListener("keydown", (event) => {
 
 /////////////////////////// Dialog e Atualização de Conteúdo ///////////////////////////
 
-// Atualiza o conteúdo do dialog com data e hora
 function updateContentHour() {
     const dialogDate = document.getElementById("dialog-data");
     const dialogTime = document.getElementById("dialog-hora");
@@ -138,17 +142,14 @@ function getWeekDay() {
     return diasSemana[d.getDay()];
 }
 
-// Atualiza o conteúdo do dialog a cada segundo
 setInterval(updateContentHour, 1000);
 
 /////////////////////////// Manipulação do Tipo de Registro ///////////////////////////
 
-// Seleção do tipo de registro
 const selectRegisterType = document.getElementById("dialog-select");
 
-// Selecionar o provável tipo do próximo registro
 function setRegisterType() {
-    const lastRegisterType = localStorage.getItem("lastRegisterType") || 'entrada'; // Valor padrão se não houver tipo de registro
+    const lastRegisterType = localStorage.getItem("lastRegisterType") || 'entrada'; 
     const tipoRegistroMap = {
         'entrada': 'intervalo',
         'intervalo': 'volta-intervalo',
@@ -156,23 +157,20 @@ function setRegisterType() {
         'saida': 'entrada'
     };
 
-    const proximoTipo = tipoRegistroMap[lastRegisterType] || 'entrada'; // Valor padrão 'entrada' se não houver mapeamento
+    const proximoTipo = tipoRegistroMap[lastRegisterType] || 'entrada'; 
     if (selectRegisterType) {
         selectRegisterType.value = proximoTipo;
     }
 
-    console.log("Tipo de registro atualizado para:", proximoTipo); // Log para verificar o valor atualizado
+    console.log("Tipo de registro atualizado para:", proximoTipo); 
 }
 
-// Atualiza o valor do select quando a página é carregada
 document.addEventListener('DOMContentLoaded', () => {
     setRegisterType();
 });
 
 /////////////////////////// Função para Mostrar Mensagens ///////////////////////////
 
-
-// Função para mostrar mensagens
 function showMessage(message, isSuccess) {
     console.log("Mostrar mensagem:", message); 
     const messageElement = document.getElementById("message");
@@ -184,7 +182,6 @@ function showMessage(message, isSuccess) {
             messageContent.textContent = message;
         }
 
-        
         messageElement.classList.toggle("sucesso", isSuccess);
         messageElement.classList.toggle("error", !isSuccess);
 
@@ -204,7 +201,6 @@ function showMessage(message, isSuccess) {
     }
 }
 
-
 /////////////////////////// Função para Atualizar a Tabela de Histórico ///////////////////////////
 
 // Função para atualizar a tabela de histórico
@@ -222,13 +218,13 @@ function updateHistoricoTable() {
         const celulaHora = novaLinha.insertCell();
         celulaHora.textContent = registro.time;
         
-        
-        
         const celulaTipo = novaLinha.insertCell();
         celulaTipo.textContent = registro.type;
+
+        const celulaJustificativa = novaLinha.insertCell();
+        celulaJustificativa.textContent = registro.justificativa ? registro.justificativa : 'N/A'; 
     });
 }
-
 
 const btnHistorico = document.getElementById("btn-historico");
 btnHistorico.addEventListener("click", () => {
@@ -241,7 +237,6 @@ btnHistorico.addEventListener("click", () => {
     }
 });
 
-
 const btnFecharHistorico = document.getElementById("btn-fechar-historico");
 btnFecharHistorico.addEventListener("click", () => {
     const dialogHistorico = document.getElementById("dialog-historico");
@@ -252,24 +247,40 @@ btnFecharHistorico.addEventListener("click", () => {
     }
 });
 
-const btnLimparHistorico = document.getElementById("btn-limpar-historico"); // Corrigi o ID aqui também
+const btnLimparHistorico = document.getElementById("btn-limpar-historico");
 
 if (btnLimparHistorico) {
     btnLimparHistorico.addEventListener("click", () => {
-        // Remove os registros do localStorage
         localStorage.removeItem("registers");
-
-        
         updateHistoricoTable();
-
-        
         showMessage("Histórico limpo com sucesso!", true);
     });
 } else {
     console.error("Botão de limpar histórico não encontrado.");
 }
 
-/////////////////////////// Botão para levar para a prox pag ///////////////////////////
+/////////////////////////// Evento de Clique no Botão Registrar ///////////////////////////
+
+const btnDialogRegister = document.getElementById("btn-dialog-register");
+if (btnDialogRegister) {
+    btnDialogRegister.addEventListener("click", async () => {
+        const registerType = selectRegisterType ? selectRegisterType.value : 'entrada'; 
+        const registro = await getObjectRegister(registerType);
+        if (registro) {
+            saveRegisterLocalStorage(registro);
+            localStorage.setItem("lastRegisterType", registerType); 
+            setRegisterType(); 
+            document.getElementById("dialog-ponto").close(); 
+            showMessage("Registro salvo com sucesso!", true); 
+        } else {
+            showMessage("Erro ao salvar o registro!", false); 
+        }
+    });
+} else {
+    console.error("Botão de registro não encontrado.");
+}
+
+/////////////////////////// Link para abrir a outra pagina ///////////////////////////
 
 const btnVerInfo = document.getElementById("btn-ver-info");
 
@@ -281,30 +292,4 @@ if (btnVerInfo) {
 } else {
     console.error("Botão 'Mais informações' não encontrado.");
 }
-
-/////////////////////////// Ação do Botão de Registro ///////////////////////////
-
-// Botão para salvar o registro selecionado
-const btnDialogRegister = document.getElementById("btn-dialog-register");
-
-if (btnDialogRegister) {
-    btnDialogRegister.addEventListener("click", async () => {
-        const registerType = selectRegisterType ? selectRegisterType.value : 'entrada'; // Valor padrão se não houver selectRegisterType
-        const registro = await getObjectRegister(registerType);
-        if (registro) {
-            saveRegisterLocalStorage(registro);
-            localStorage.setItem("lastRegisterType", registerType); // Salva o último tipo de registro
-            setRegisterType(); // Atualiza o tipo de registro para o próximo
-            document.getElementById("dialog-ponto").close(); // Fecha o dialog
-            showMessage("Registro salvo com sucesso!", true); // Mostrar mensagem de sucesso
-        } else {
-            showMessage("Erro ao salvar o registro!", false); // Mostrar mensagem de erro
-        }
-    });
-} else {
-    console.error("Botão de registro não encontrado.");
-}
-
-
-
 

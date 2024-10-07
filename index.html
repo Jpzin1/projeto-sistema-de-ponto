@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
-
 </head>
 <body>
     <div class="data-hora">
@@ -20,6 +19,7 @@
 
     <dialog id="dialog-ponto">
         <span class="close" id="dialog-fechar">&times;</span>
+        <p id="dialog-text">Registrar Ponto</p>
         <p id="dialog-data">Data</p>
         <p id="dialog-hora">Hora</p>
         <select id="dialog-select">
@@ -28,12 +28,27 @@
             <option value="volta-intervalo">Volta Intervalo</option>
             <option value="saida">Saída</option>
         </select>
-        <button id="btn-dialog-register">Registrar</button>
         <p class="input-container">
-            <input id="text" placeholder="Justificativa (opcional)" name="justificativa" class="input-field">
+            <label for="justificativa-select"></label>
+            <select id="justificativa-select">
+                <option value="sem-justificativa">Sem Justificativa</option>
+                <option value="atraso">Atraso</option>
+                <option value="falta">Falta</option>
+                <option value="doenca">Doença</option>
+                <option value="compromissos-pessoais">Compromissos Pessoais</option>
+                <option value="transito">Trânsito</option>
+                <option value="problemas-transporte">Problemas de Transporte</option>
+                <option value="urgencia-familiar">Urgência Familiar</option>
+                <option value="atestado-medico">Atestado Médico</option>
+                <option value="atividades-academicas">Atividades Acadêmicas</option>
+                <option value="treinamento">Treinamento</option>
+                <option value="reunioes-externas">Reuniões Externas</option>
+                <option value="problemas-tecnicos">Problemas Técnicos</option>
+                <option value="licenca">Licença</option>
+            </select>
         </p>
-        
 
+        <button id="btn-dialog-register">Registrar</button>
     </dialog>
 
     <dialog id="dialog-historico">
@@ -44,10 +59,11 @@
                     <th>Data</th>
                     <th>Hora</th>
                     <th>Tipo</th>
+                    <th>Justificativa</th> <!-- Adicionando coluna para a justificativa -->
                 </tr>
             </thead>
             <tbody>
-                <!-- Registros serão exibidos aqui-->
+                <!-- Registros serão exibidos aqui -->
             </tbody>
         </table>
         <button id="btn-fechar-historico">Fechar</button>
@@ -65,7 +81,7 @@
             <label for="justificativa">Justificativa:</label>
             <input type="text" id="justificativa" required>
 
-            <button type="submit">Enviar</button
+            <button type="submit">Enviar</button>
         </form>
         <h3>Justificativas Registradas</h3>
         <ul id="justificativasList"></ul>
@@ -77,5 +93,10 @@
     </div>
 
     <script src="index.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Seu código JavaScript aqui
+        });
+    </script>
 </body>
 </html>

@@ -1,20 +1,29 @@
 body {
     box-sizing: border-box;
     margin: 0;
-    background-color: #6439FF;
+    background-color: #F2E8C6; /* Cor de fundo alterada */
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 150px;
-
 }
+
+dialog {
+    background-color: #DAD4B5; 
+    border: none; 
+    border-radius: 8px; 
+    padding: 20px; 
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); 
+    margin-top: 14%;
+}
+
 
 .data-hora {
     text-align: center;
     margin-bottom: 20px;
     font-size: 2em; 
     font-weight: 300; 
-    color: #000000; 
+    color: #800000; /* Cor do texto alterada */
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); 
     border-radius: 8px; 
     padding: 15px; 
@@ -26,30 +35,25 @@ body {
     margin: 0;
     text-align: center;
     margin-bottom: 20px;
-    font-size: 1.5em;
-     
+    font-size: 1.5em; 
 }
-
 
 #btn-registrar-ponto {
     padding: 15px 30px;
     font-size: 150%;
-    background-color: #ffffff;
-    color: #000000;
+    background-color: #982B1C; /* Cor do botão alterada */
+    color: #ffffff; /* Cor do texto alterada */
     border: none;
     border-radius: 25px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
     font-family: "Raleway", sans-serif;
-    
-
 }
 
 #btn-registrar-ponto:hover {
-    background-color: #f0f0f0; 
+    background-color: #800000; /* Cor do botão ao passar o mouse */
     transform: scale(1.05); 
 }
-
 
 .modal {
     display: none; 
@@ -63,9 +67,8 @@ body {
     background-color: rgba(0,0,0,0.4);
 }
 
-
 .modal-content {
-    background-color: white;
+    background-color: #DAD4B5; /* Cor de fundo do modal */
     margin: 20% auto; 
     padding: 20px;
     border: 1px solid #888;
@@ -73,13 +76,11 @@ body {
     height: auto;
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    
     display: block;
     text-align: center;
     flex-direction: column;
     align-items: center; 
     justify-content: center; 
-    
 }
 
 .modal-content p {
@@ -90,9 +91,7 @@ body {
 .modal-content button {
     padding: 5px;
     margin-top: auto; 
-    
 }
-
 
 .close {
     color: #6b6b6b;
@@ -117,11 +116,10 @@ body {
     border-color: #ee0000;
 }
 
-
-#dialog-data, #dialog-hora {
+#dialog-text {
     font-size: 1.5em;
     font-weight: 300;
-    color: #000000;
+    color: #800000; /* Cor do texto alterada */
     border-radius: 10px;
     margin-bottom: 15px;
     text-align: center;
@@ -129,12 +127,22 @@ body {
     width: 500px;
 }
 
+#dialog-data, #dialog-hora {
+    font-size: 1.5em;
+    font-weight: 300;
+    color: #800000; /* Cor do texto alterada */
+    border-radius: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-family: "Raleway", sans-serif;
+    width: 500px;
+}
 
 #message {
     display: none; 
     padding: 15px;
     border-radius: 25px;
-    background-color: #faf9ff;
+    background-color: #F2E8C6; /* Cor de fundo da mensagem */
     position: fixed;
     bottom: 150px; 
     left: 50%;
@@ -183,9 +191,9 @@ body {
 select {
     padding: 10px;
     font-size: 1em;
-    background-color: #6439FF;
+    background-color: #DAD4B5; /* Cor de fundo do select */
     border-radius: 8px;
-    color: #ffffff;
+    color: #800000; /* Cor do texto alterada */
     cursor: pointer;
     
     transition: background-color 0.3s ease, transform 0.3s ease;
@@ -206,30 +214,27 @@ select::after {
 }
 
 select:hover {
-    background-color: #6439FF;
+    background-color: #DAD4B5; /* Cor ao passar o mouse */
     transform: scale(1.05);
 }
 
 button {
     padding: 10px;
     font-size: 1em;
-    background-color: #6439FF;
+    background-color: #982B1C; /* Cor do botão alterada */
     border-radius: 8px;
-    color: #ffffff;
+    color: #ffffff; /* Cor do texto alterada */
     cursor: pointer;
     appearance: none; 
     transition: background-color 0.3s ease, transform 0.3s ease;
     margin-right: 10px;
     font-family: "Raleway", sans-serif;
-    
-    
 }
 
 button:hover {
-    background-color: #6439FF;
+    background-color: #800000; /* Cor do botão ao passar o mouse */
     transform: scale(1.05);
 }
-
 
 #dialog-historico {
     width: 80%;
@@ -237,7 +242,7 @@ button:hover {
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
-    background-color: #f9f9f9;
+    background-color: #F2E8C6; /* Cor de fundo do histórico */
 }
 
 #historico-table {
@@ -252,7 +257,7 @@ button:hover {
 }
 
 #historico-table th {
-    background-color: #f2f2f2;
+    background-color: #DAD4B5; /* Cor de fundo do cabeçalho da tabela */
     font-weight: bold;
 }
 
@@ -260,21 +265,21 @@ button:hover {
     margin-top: 20px;
     padding: 10px 20px;
     border: none;
-    background-color: #6439FF;
-    color: #ffffff;
+    background-color: #982B1C; /* Cor do botão de fechar */
+    color: #ffffff; /* Cor do texto do botão de fechar */
     border-radius: 5px;
     cursor: pointer;
 }
 
 #btn-fechar-historico:hover {
-    background-color: #6439FF;
+    background-color: #800000; /* Cor ao passar o mouse no botão de fechar */
 }
 
 #btn-historico {
     padding: 15px 30px;
     font-size: 150%;
-    background-color: #ffffff;
-    color: #000000;
+    background-color: #982B1C; /* Cor do botão histórico */
+    color: #ffffff; /* Cor do texto do botão histórico */
     border: none;
     border-radius: 25px;
     cursor: pointer;
@@ -284,10 +289,9 @@ button:hover {
 }
 
 #btn-historico:hover {
-    background-color: #f0f0f0; 
+    background-color: #800000; /* Cor ao passar o mouse no botão histórico */
     transform: scale(1.05); 
 }
-
 
 dialog::backdrop {
     background-color: rgba(0, 0, 0, 0.8); 
@@ -301,32 +305,12 @@ dialog::-webkit-details-marker {
     margin-top: 20px;
     padding: 10px 20px;
     border: none;
-    background-color: #6439FF;
-    color: #ffffff;
+    background-color: #982B1C; /* Cor do botão limpar histórico */
+    color: #ffffff; /* Cor do texto do botão limpar histórico */
     border-radius: 5px;
     cursor: pointer;
 }
 
 #btn-limpar-historico:hover {
-    background-color: #6439FF;
+    background-color: #800000; /* Cor ao passar o mouse no botão limpar histórico */
 }
-
-
-.input-container {
-    position: relative;
-    margin-bottom: 20px;
-}
-
-.input-field {
-    font-size: 1rem;
-    padding: 10px 10px 10px 40px; 
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 300px;
-    box-sizing: border-box;
-    transition: border-color 0.3s ease;
-}
-
-
-
-

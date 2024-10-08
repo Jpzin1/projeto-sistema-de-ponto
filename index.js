@@ -43,19 +43,18 @@ async function getObjectRegister(registerType) {
                 return new Promise((resolve, reject) => {
                     const reader = new FileReader();
                     reader.onload = (e) => {
-                        // Criando um Blob a partir do arquivo
                         const blob = new Blob([e.target.result], { type: file.type });
                         const url = URL.createObjectURL(blob);
-                        resolve({ url: url, name: file.name }); // Armazena URL e nome do arquivo
+                        resolve({ url: url, name: file.name }); 
                     };
                     reader.onerror = (error) => {
                         console.error("Erro ao ler o arquivo:", error);
                         reject(error);
                     };
-                    reader.readAsArrayBuffer(file); // Lê o arquivo como ArrayBuffer para criar o Blob
+                    reader.readAsArrayBuffer(file); 
                 });
             });
-            comprovantes = await Promise.all(filePromises); // Aguarda todas as promessas
+            comprovantes = await Promise.all(filePromises); 
         }
 
         let ponto = {
@@ -65,7 +64,7 @@ async function getObjectRegister(registerType) {
             "id": Date.now(),
             "type": registerType,
             "justificativa": justificativa,
-            "comprovantes": comprovantes // Incluindo os comprovantes como URLs
+            "comprovantes": comprovantes 
         };
 
         console.log(`Registro criado: 
@@ -123,6 +122,17 @@ window.addEventListener("keydown", (event) => {
         dialogPonto.close();
     }
 });
+
+// Ação para o botão funcionar (botão registrar ponto (fechar))
+document.addEventListener('DOMContentLoaded', () => {
+    const dialogPonto = document.getElementById('dialog-ponto');
+    const btnDialogExit = document.getElementById('btn-dialog-exit');
+
+    btnDialogExit.addEventListener('click', () => {
+        dialogPonto.close(); 
+    });
+});
+
 
 /////////////////////////// Dialog e Atualização de Conteúdo ///////////////////////////
 

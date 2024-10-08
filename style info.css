@@ -1,0 +1,59 @@
+body {
+    box-sizing: border-box;
+    margin: 0;
+    background-color: #F2E8C6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 0%;
+}
+
+h1 {
+    font-size: 2.5em;
+}
+
+p {
+    font-size: 1.5em;
+}
+
+#btn-voltar {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    padding: 15px 30px;
+    font-size: 100%;
+    background-color: #982B1C; 
+    color: #ffffff; 
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-family: "Raleway", sans-serif;
+
+}
+
+#btn-voltar:hover {
+    background-color: #800000; 
+    transform: scale(1.05); 
+}
+
+
+.registro-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.registro-item p {
+    margin: 5px 0;
+}
+
+.registro-item div {
+    margin-top: 10px;
+}
+
+.registro-item button {
+    margin-right: 10px;
+}
+
+

@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let registros = JSON.parse(localStorage.getItem('registers')) || [];
         registros.splice(index, 1); 
         localStorage.setItem('registers', JSON.stringify(registros));
-        carregarHistorico(); // Recarrega o histórico após a exclusão
+        carregarHistorico(); 
     }
 
     // Botão de voltar para a página anterior

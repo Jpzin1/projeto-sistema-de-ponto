@@ -1,6 +1,7 @@
 // Importar o Express
 const express = require('express');
-const path = require('path')
+const path = require('path');
+const { connect } = require('./database.js');
 const app = express();
 const port = 3000;
 
@@ -9,6 +10,8 @@ app.use(express.json());
 
 // Servir arquivos estáticos (CSS, JS, imagens) da pasta 'frontend'
 app.use(express.static(path.join(__dirname, 'frontend')));
+
+connect(); 
 
 // Rota GET simples
 app.get('/', (req, res) => {
@@ -26,5 +29,9 @@ app.post('/dados', (req, res) => {
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });
+
+
+
+
 
 
